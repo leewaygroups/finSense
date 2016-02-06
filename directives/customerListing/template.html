@@ -1,0 +1,34 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>BVN</th>
+            <th>Bank Detail</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="customer in customers">
+            <td>{{customer.name | uppercase}}</td>
+            <td>{{customer.BVN}}</td>
+            <!--
+                        <td>{{row.birthDate | date}}</td>
+                        <td>{{row.balance | currency}}</td>
+-->
+            <td>
+                <a ui-sref='customerDetail({customerId : customer.BVN})'> <i class="glyphicon glyphicon-eye-open"></i>account</a>
+                <!--<a  ng-click="manageCustomerAccount(customer)"> <i class="glyphicon glyphicon-eye-open"></i>account</a>-->
+            </td>
+            <td>
+                <button type="button" ng-click="editPerson(customer)" class="btn btn-sm btn-primary">
+                    <i class="glyphicon glyphicon-edit"></i>
+
+                </button>
+            </td>
+            <td>
+                <button type="button" ng-click="remove(customer)" class="btn btn-sm btn-danger">
+                    <i class="glyphicon glyphicon-remove"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

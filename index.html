@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en-us" ng-app="myApp">
+
+<head>
+    <title>Learn and Understand AngularJS</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="UTF-8">
+
+    <!-- load bootstrap and fontawesome via CDN -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,700' rel='stylesheet' type='text/css'>
+    <link href='css/main.css' rel='stylesheet' type='text/css'>
+    <link href='css/customerAccountGraph.css' rel='stylesheet' type='text/css'>
+    
+
+    <!-- START SIGMA IMPORTS -->
+    <script src="libs/src/sigma.core.js"></script>
+    <script src="libs/src/conrad.js"></script>
+    <script src="libs/src/utils/sigma.utils.js"></script>
+    <script src="libs/src/utils/sigma.polyfills.js"></script>
+    <script src="libs/src/sigma.settings.js"></script>
+    <script src="libs/src/classes/sigma.classes.dispatcher.js"></script>
+    <script src="libs/src/classes/sigma.classes.configurable.js"></script>
+    <script src="libs/src/classes/sigma.classes.graph.js"></script>
+    <script src="libs/src/classes/sigma.classes.camera.js"></script>
+    <script src="libs/src/classes/sigma.classes.quad.js"></script>
+    <script src="libs/src/captors/sigma.captors.mouse.js"></script>
+    <script src="libs/src/captors/sigma.captors.touch.js"></script>
+    <script src="libs/src/renderers/sigma.renderers.canvas.js"></script>
+    <script src="libs/src/renderers/sigma.renderers.webgl.js"></script>
+    <script src="libs/src/renderers/sigma.renderers.svg.js"></script>
+    <script src="libs/src/renderers/sigma.renderers.def.js"></script>
+    <script src="libs/src/renderers/webgl/sigma.webgl.nodes.def.js"></script>
+    <script src="libs/src/renderers/webgl/sigma.webgl.nodes.fast.js"></script>
+    <script src="libs/src/renderers/webgl/sigma.webgl.edges.def.js"></script>
+    <script src="libs/src/renderers/webgl/sigma.webgl.edges.fast.js"></script>
+    <script src="libs/src/renderers/webgl/sigma.webgl.edges.arrow.js"></script>
+    <script src="libs/src/renderers/canvas/sigma.canvas.labels.def.js"></script>
+    <script src="libs/src/renderers/canvas/sigma.canvas.hovers.def.js"></script>
+    <script src="libs/src/renderers/canvas/sigma.canvas.nodes.def.js"></script>
+    <script src="libs/src/renderers/canvas/sigma.canvas.edges.def.js"></script>
+    <script src="libs/src/renderers/canvas/sigma.canvas.edges.curve.js"></script>
+    <script src="libs/src/renderers/canvas/sigma.canvas.edges.arrow.js"></script>
+    <script src="libs/src/renderers/canvas/sigma.canvas.edges.curvedArrow.js"></script>
+    <script src="libs/src/renderers/canvas/sigma.canvas.edgehovers.def.js"></script>
+    <script src="libs/src/renderers/canvas/sigma.canvas.edgehovers.curve.js"></script>
+    <script src="libs/src/renderers/canvas/sigma.canvas.edgehovers.arrow.js"></script>
+    <script src="libs/src/renderers/canvas/sigma.canvas.edgehovers.curvedArrow.js"></script>
+    <script src="libs/src/renderers/canvas/sigma.canvas.extremities.def.js"></script>
+    <script src="libs/src/renderers/svg/sigma.svg.utils.js"></script>
+    <script src="libs/src/renderers/svg/sigma.svg.nodes.def.js"></script>
+    <script src="libs/src/renderers/svg/sigma.svg.edges.def.js"></script>
+    <script src="libs/src/renderers/svg/sigma.svg.edges.curve.js"></script>
+    <script src="libs/src/renderers/svg/sigma.svg.edges.curvedArrow.js"></script>
+    <script src="libs/src/renderers/svg/sigma.svg.labels.def.js"></script>
+    <script src="libs/src/renderers/svg/sigma.svg.hovers.def.js"></script>
+    <script src="libs/src/middlewares/sigma.middlewares.rescale.js"></script>
+    <script src="libs/src/middlewares/sigma.middlewares.copy.js"></script>
+    <script src="libs/src/misc/sigma.misc.animation.js"></script>
+    <script src="libs/src/misc/sigma.misc.bindEvents.js"></script>
+    <script src="libs/src/misc/sigma.misc.bindDOMEvents.js"></script>
+    <script src="libs/src/misc/sigma.misc.drawHovers.js"></script>
+    <!-- END SIGMA IMPORTS -->
+    <script src="libs/plugins/sigma.parsers.gexf/gexf-parser.js"></script>
+    <script src="libs/plugins/sigma.parsers.gexf/sigma.parsers.gexf.js"></script>
+    <script src="libs/plugins/sigma.plugins.filter/sigma.plugins.filter.js"></script>
+
+
+   
+
+    <!-- load angular via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.17/angular-ui-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap-tpls.js"></script>
+    <script src="app.js"></script>
+    <script src="customers/customersCtrl.js"></script>
+    <script src="customerDetail/customerDetailCtrl.js"></script>
+    <script src="directives/customerListing/customerListing.js"></script>
+    <script src="directives/customerAccountsGraph/customerAccountsGraph.js"></script>
+    <script src="services/data.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">AngularJS</a>
+                </div>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <div>
+            <div ui-view></div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

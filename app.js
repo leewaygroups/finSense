@@ -6,17 +6,24 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/customers');
 
     $stateProvider
+        .state('login', {
+            url: '/login',
+            templateUrl: 'login/login.html',
+            controller: 'loginCtrl'
+        })
+    .state('signup', {
+        url: '/signup',
+        templateUrl: 'signup/signup.html',
+        controller: 'signupCtrl'
+    })
         .state('customers', {
             url: '/customers',
             templateUrl: 'customers/customers.html',
             controller: 'customersCtrl'
         })
-
-    .state('customerDetail', {
-        url: '/customers/:customerId',
-        templateUrl: '/customerDetail/customerDetail.html',
-        controller: 'customerDetailCtrl'
-    });
+        .state('customerDetail', {
+            url: '/customers/:customerId',
+            templateUrl: '/customerDetail/customerDetail.html',
+            controller: 'customerDetailCtrl'
+        });
 });
-
-

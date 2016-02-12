@@ -159,12 +159,7 @@ myApp.directive('customerAccountsGraph', [function () {
             _.$('node-category').addEventListener("change", applyCategoryFilter);
         });
 
-
-
-
-
-
-
+        
     }];
 
     return {

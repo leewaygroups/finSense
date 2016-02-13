@@ -56,7 +56,7 @@ myApp.service('httpResponseHandler', function ($location, $q, $cookies, $state) 
 
             $state.go('customers');
         },
-        
+
         failureHandler: function (response) {
             console.log("Failed");
             console.log(response);

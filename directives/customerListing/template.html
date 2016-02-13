@@ -2,20 +2,29 @@
     <thead>
         <tr>
             <th>Name</th>
-            <th>BVN</th>
+            <th>Number</th>
+            <th>Type</th>
+            <th>Sort Code</th>
+            <th>Currency</th>
+            <th>Balance</th>
             <th>Bank Detail</th>
+            
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="customer in customers">
-            <td>{{customer.name | uppercase}}</td>
-            <td>{{customer.BVN}}</td>
+        <tr ng-repeat="account in accounts">
+            <td>{{account.label | uppercase}}</td>
+            <td>{{account.number}}</td>
+            <td>{{account.type}}</td>
+            <td>{{account.brachSortCode}}</td>
+            <td>{{account.balance.currency}}</td>
+            <td>{{account.balance.amount}}</td>
             <!--
                         <td>{{row.birthDate | date}}</td>
                         <td>{{row.balance | currency}}</td>
 -->
             <td>
-                <a ui-sref='customerDetail({customerId : customer.BVN})'> <i class="glyphicon glyphicon-eye-open"></i>account</a>
+                <a ui-sref='customerDetail({customerId : customer.BVN})'> <i class="glyphicon glyphicon-eye-open"></i>view</a>
                 <!--<a  ng-click="manageCustomerAccount(customer)"> <i class="glyphicon glyphicon-eye-open"></i>account</a>-->
             </td>
             <td>

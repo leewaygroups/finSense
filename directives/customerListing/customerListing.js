@@ -22,7 +22,7 @@ myApp.directive('customerListing', [function () {
         replace: true,
         templateUrl: 'directives/customerListing/template.html',
         scope: {
-            customers: '='
+            accounts: '='
         },
         controller: customerListingCtrl
     };

@@ -3,15 +3,12 @@ myApp.controller('customersCtrl', ['$scope', '$http', '$state', 'urlService', 'd
     $scope.customers = dataService.persons;
 
     var successHandler = function (response) {
-        console.log("Customer get succeeded")
-        console.log(response.data);
-        
+          
         $scope.accounts = response.data;
     };
 
     var failureHandler = function (response) {
-        console.log("Customer get failed")
-        $state.go('login')
+        $state.go('signin')
     }
 
     $http({

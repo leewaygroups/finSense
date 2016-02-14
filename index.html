@@ -83,6 +83,7 @@
     <script src="services/urls.js"></script>
     <script src="login/loginCtrl.js"></script>
     <script src="signup/signupCtrl.js"></script>
+    <script src="login/signoutCtrl.js"></script>
 </head>
 
 <body>
@@ -96,6 +97,8 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                    <li ng-if="!isSignedIn"><a  ui-sref="signin"><i class="fa fa-sign-in"></i> Sign in</a></li>
+                    <li ng-if="isSignedIn"><a  ui-sref="signout" class="link"><i class="fa fa-sign-out"></i> Sign out</a></li>
                 </ul>
             </div>
         </nav>

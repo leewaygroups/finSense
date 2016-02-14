@@ -6,10 +6,13 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$cookiesProvider', '$http
     $urlRouterProvider.otherwise('/login');
 
     $stateProvider
-        .state('login', {
-            url: '/login',
+        .state('signin', {
+            url: '/signin',
             templateUrl: 'login/login.html',
             controller: 'loginCtrl'
+        })
+        .state('signout', {
+            controller: 'signoutCtrl'
         })
         .state('signup', {
             url: '/signup',
@@ -33,6 +36,9 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$cookiesProvider', '$http
             //prehandle request
             request: function (config) {
                 config.headers = config.headers || {};
+
+                var test = $cookies.getObject('finSenseAuthToken');
+
                 config.headers['x-access-token'] = $cookies.getObject('finSenseAuthToken');
                 return config;
             },
@@ -44,17 +50,28 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$cookiesProvider', '$http
     });
 }]);
 
-myApp.service('httpResponseHandler', function ($location, $q, $cookies, $state) {
+myApp.service('AuthorizationFlags', ['$rootScope', function ($rootscope) {
+    $rootscope.isSignedIn = false;
+
+    this.getSignedInStatus = function () {
+        return $rootscope.isSignedIn;
+    };
+    this.setSignedInStatus = function (status) {
+        $rootscope.isSignedIn = status;
+    };
+}]);
+
+myApp.service('httpResponseHandler', ['$location', '$q', '$cookies', '$state', 'AuthorizationFlags', function ($location, $q, $cookies, $state, AuthorizationFlags) {
 
     this.handleLogin = {
         successHandler: function (response) {
-            console.log("Succeeded");
-            console.log(response);
+            var accessToken = response.data.token || response.config.headers['x-access-token']
+            $cookies.putObject('finSenseAuthToken', accessToken);
+            AuthorizationFlags.setSignedInStatus(true);
 
-            $cookies.putObject('finSenseAuthToken', response.data.token);
-            console.log($cookies.getObject('finSenseAuthToken'));
-
-            $state.go('customers');
+            $state.go('customers', {
+                'token': $cookies.getObject('finSenseAuthToken')
+            });
         },
 
         failureHandler: function (response) {
@@ -73,14 +90,15 @@ myApp.service('httpResponseHandler', function ($location, $q, $cookies, $state) 
             $location.path('/');
         }
     };
-    // Revoke client authentication if 401 is received 
+
+    //  
     this.responseError = function (rejection) {
         if (rejection != null && rejection.status === 401 && ($cookies.getObject('finSenseAuthToken'))) {
             $cookies.remove("finSenseAuthToken");
-            $state.go("login");
+            $state.go("signin");
         }
 
         return $q.reject(rejection);
     };
 
-});
+}]);

@@ -4,8 +4,8 @@ var urls = {
     login: 'http://localhost:3000/api/login',
 };
 
-myApp.service('urlService', function(){
-    
+myApp.service('urlService', function () {
+
     this.urls = urls;
-    
+
 });

@@ -8,50 +8,48 @@
                 </div>
             </div>
             <div class="panel-body">
-                <form id="signupform" class="form-horizontal" role="form">
+                <form id="signupform" name="signupform" class="form-horizontal" role="form" ng-submit="registerNewUser(signupform.$valid)" novalidate="novalidate">
 
                     <div id="signupalert" style="display:none" class="alert alert-danger">
                         <p>Error:</p>
                         <span></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error' : signupform.email.$invalid && !signupform.email.$pristine }">
                         <label for="email" class="col-md-3 control-label">Email</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" name="email" placeholder="Email Address">
+                            <input type="email" class="form-control" name="email" placeholder="Email Address" ng-model="newUser.email" validate-email>
+                            <div class="alert alert-danger" role="alert" ng-if="signupform.email.$error.email && !signupform.email.$pristine">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Error:</span> Email is required and must be like this: characters@characters.two to ten characters
+                            </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-md-3 control-label">First Name</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" name="firstname" placeholder="First Name">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastname" class="col-md-3 control-label">Last Name</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" name="lastname" placeholder="Last Name">
-                        </div>
-                    </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error' : signupform.password.$invalid && !signupform.password.$pristine }">
                         <label for="password" class="col-md-3 control-label">Password</label>
                         <div class="col-md-9">
-                            <input type="password" class="form-control" name="passwd" placeholder="Password">
+                            <input type="password" class="form-control" name="password" placeholder="Password" ng-model="newUser.password" validate-password>
+                            <div class="alert alert-danger" role="alert" ng-if="signupform.password.$error.password && !signupform.password.$pristine">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Error:</span> Password is required and valid characters include: a-z, A-Z, 0-9, _, -. Must be between 6-18 characters.
+                            </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="icode" class="col-md-3 control-label">Invitation Code</label>
+                    <div class="form-group" ng-class="{ 'has-error' : signupform.confirm.$invalid && !signupform.confirm.$pristine }">
+                        <label for="confirm" class="col-md-3 control-label">Confirm</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" name="icode" placeholder="">
+                            <input type="password" class="form-control" name="confirm" placeholder="Re-enter password" ng-model="newUser.confirm" confirm-password>
+                            <div class="alert alert-danger" role="alert" ng-if="signupform.confirm.$error.confirm && !signupform.confirm.$pristine">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Error:</span> Must match password.
+                            </div>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <!-- Button -->
                         <div class="col-md-offset-3 col-md-9">
-                            <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button>
-                            <span style="margin-left:8px;">or</span>
+                            <button id="btn-signup" type="submit" class="btn btn-info" ng-disabled="signupform.$invalid"><i class="icon-hand-right"></i> &nbsp Sign Up</button>
+                            <!--<span style="margin-left:8px;">or</span>-->
                         </div>
                     </div>
                 </form>

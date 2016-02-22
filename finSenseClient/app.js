@@ -1,9 +1,9 @@
-var myApp = angular.module('myApp', ['ui.bootstrap', 'ui.router', 'ngCookies']);
+var myApp = angular.module('myApp', ['ui.bootstrap', 'ui.router', 'ngCookies', 'ngMessages']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$cookiesProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $cookiesProvider, $httpProvider) {
 
     //default route
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/signin');
 
     $stateProvider
         .state('signin', {
@@ -79,6 +79,11 @@ myApp.service('httpResponseHandler', ['$location', '$q', '$cookies', '$state', '
             console.log(response);
         }
     };
+    
+    this.handleSignup = {
+        successHandler: function(response){},
+        failureHandler: function(response){}
+    }
 
     this.handlOthersResponses = function (response) {
 
